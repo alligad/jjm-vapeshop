@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vape Online Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #222;
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .hero {
+            background-image: url('https://vapeshop-online.ch/wp-content/uploads/2024/05/Einweg-2-2.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+            position: relative;
+        } 
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero h1,
+        .hero p,
+        .hero a {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            padding: 15px 30px;
+            background-color: #ff4d4d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #e04a4a;
+        }
+        .bestseller-title {
+            text-align: center;
+            font-size: 2em;
+            margin: 40px 0;
+            color: #333;
+        }
+        .products {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 1200px;
+        }
+        .product {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .product h3 {
+            margin: 15px 0;
+            font-size: 1.3em;
+            color: #333;
+        }
+        .product p {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .product button {
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .product button:hover {
+            background-color: #e04a4a;
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        footer p {
+            font-size: 1em;
+        }
+        @media (max-width: 768px) {
+            .products {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product {
+                margin-bottom: 20px;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">VapeShop</a>
+        </div>
+    </header>
+    <section class="hero">
+        <h1>Willkommen bei VapeShop</h1>
+        <p>Finde die besten Vapes und E-Liquids hier!</p>
+        <a href="homepage.html" class="cta-button">Jetzt Shoppen</a>
+    </section>
+    <h2 class="bestseller-title">Unsere Bestseller</h2>
+    <section class="products">
+        <div class="product">
+         <img src="https://smokesmart-online.de/media/af/2e/37/1693388596/hqd-e-vape-mit-nikotin_8.jpg" alt="HQD mix Bundle">    
+            <h3>HQD mix Bundle</h3>
+            <p>Mit allen Geschmacksrichtungen (Dragon Strawberry, Black ICE und Shoria). Insgesamt 1800 puffs</p>
+            <p class="price">€19.99</p>
+        </div>
+        <div class="product">
+            <img src="https://justvape.nu/wp-content/uploads/2022/09/elfbar-bundle.jpg" alt="ELFBAR mix Bundle">
+            <h3>ELFBAR mix Bundle</h3>
+            <p>Mit allen Geschmacksrichtungen (Blueberry, Raspberry und Strawberry Raspberry Cherry Ice). Insgesamt 1800 puffs</p>
+            <p>21.99€</p>
+        </div>
+        <div class="product">
+            <img src="https://shop.vape.hk/wp-content/uploads/2024/03/corssi-crystal6000-disposable-vape-kits_main.jpg" alt="Crystal mix Bundle">
+            <h3>Crystal mix Bundle</h3>
+            <p>Mit allen Geschmacksrichtungen (Watermelon ICE, Pink Lemonade und Sour Apple). Insgesamt 1800 puffs</p>
+            <p>21.99€</p>
+        </div>
+    </section>
+    <footer>
+        <p>© 2024 VapeShop. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+ 
+</html>
+ 
