@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vape Onlineshop</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .content {
+            padding-top: 100px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            z-index: 1001;
+        }
+
+        .modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            font-size: 1rem;
+        }
+
+        .modal button {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .products {
+            padding: 50px 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            margin: 20px 0 10px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .product-card .price {
+            color: green;
+            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+
+        .product-card button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .product-card button:hover {
+            background-color: #45a049;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 1000;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: none;
+        }
+
+        .popup img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .popup h2 {
+            margin: 10px 0;
+        }
+
+        .popup input {
+            width: 50px;
+            margin-left: 10px;
+            padding: 5px;
+        }
+
+        .popup button {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin: 10px 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #e55a5a;
+        }
+
+        .description {
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Vape Onlineshop</h1>
+        <div class="dropdown">
+            <button>Menü</button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0);" onclick="toggleAuthModal()">Anmelden</a>
+                <a href="javascript:void(0);" onclick="toggleCartModal()">Einkaufswagen</a>
+                <a href="#products">Produkte</a>
+                <a href="#about">Über uns</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="modal" id="authModal">
+            <h2>Anmelden</h2>
+            <input type="text" id="username" placeholder="Benutzername">
+            <input type="password" id="password" placeholder="Passwort">
+            <button onclick="login()">Anmelden</button>
+            <button onclick="register()">Registrieren</button>
+            <button onclick="closeAuthModal()">Schließen</button>
+        </div>
+
+        <div class="modal" id="cart-modal">
+            <h2>Warenkorb</h2>
+            <div id="cart-items-modal"></div>
+            <p id="cart-total-modal"></p>
+            <button onclick="clearCart()">Warenkorb leeren</button>
+            <button onclick="closeCartModal()">Schließen</button>
+        </div>
+
+        <div class="overlay" id="overlay" onclick="closePopup(); closeCartModal();"></div>
+
+        <div class="popup" id="product-popup">
+            <div class="details">
+                <img id="popup-image" src="" alt="Produktbild">
+                <h2 id="popup-title"></h2>
+                <p>Preis: <span id="popup-price"></span>€</p>
+                <label for="quantity">Menge:</label>
+                <input type="number" id="popup-quantity" value="1" min="1">
+                <div class="description">
+                    <h4>Beschreibung:</h4>
+                    <p id="popup-description"></p>
+                    <h4>Inhaltsstoffe:</h4>
+                    <p id="popup-ingredients"></p>
+                </div>
+                <button id="add-to-cart-btn">In den Warenkorb</button>
+                <button onclick="closePopup()">Schließen</button>
+            </div>
+        </div>
+
+        <section class="hero" id="home">
+            <h2>Willkommen bei deinem Vape Onlineshop</h2>
+        </section>
+
+        <section class="products" id="products">
+            <div class="product-card">
+                <img src="https://egogreen.de/1281-large_default/e-zigaretten-einweg-e-zigaretten-elfbar-vape-e-shishas-blueberry.jpg" alt="ELFBAR Blueberry">
+                <h3>ELFBAR Blueberry</h3>
+                <p>600 Puffs, Blueberry Geschmack</p>
+                <p class="price">€7.99</p>
+                <button onclick="openPopup('ELFBAR Blueberry', 'https://egogreen.de/1281-large_default/e-zigaretten-einweg-e-zigaretten-elfbar-vape-e-shishas-blueberry.jpg', 7.99, '600 Puffs, Blueberry Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://cdn11.bigcommerce.com/s-jx1jb6utha/images/stencil/1280x1280/products/244/683/HQD-Wave-Black-Ice__34678.1681993756.jpg?c=1" alt="HQD Black ICE">
+                <h3>HQD Black ICE</h3>
+                <p>600 Puffs, erfrischender Geschmack</p>
+                <p class="price">€7.99</p>
+                <button onclick="openPopup('HQD Black ICE', 'https://cdn11.bigcommerce.com/s-jx1jb6utha/images/stencil/1280x1280/products/244/683/HQD-Wave-Black-Ice__34678.1681993756.jpg?c=1', 7.99, '600 Puffs, erfrischender Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://shisha-express.com/wp-content/uploads/2023/03/hqd-surv-einweg-vape-shoria.jpg" alt="HQD Shoria">
+                <h3>HQD Shoria</h3>
+                <p>600 Puffs, süßer Geschmack</p>
+                <p class="price">€7.99</p>
+                <button onclick="openPopup('HQD Shoria', 'https://shisha-express.com/wp-content/uploads/2023/03/hqd-surv-einweg-vape-shoria.jpg', 7.99, '600 Puffs, süßer Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://www.shisha-ssm.de/media/image/product/8857/lg/hqd-vape-surv-600-dragon-strawberry.jpg" alt="HQD Dragon Strawbarry">
+                <h3>HQD Dragon Strawbarry</h3>
+                <p>600 Puffs, Dragon Strawbarry Geschmack</p>
+                <p class="price">€7.99</p>
+                <button onclick="openPopup('HQD Dragon Strawbarry', 'https://www.shisha-ssm.de/media/image/product/8857/lg/hqd-vape-surv-600-dragon-strawberry.jpg', 7.99, '600 Puffs, Dragon Strawbarry Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://cdn02.plentymarkets.com/fp799r13gmb5/item/images/10575/full/elf-bar-600-blueberry-raspberry-20mg.jpg" alt="ELFBAR Bluebarry Raspberry">
+                <h3>ELFBAR Bluebarry Raspberry</h3>
+                <p>600 Puffs, Bluebarry Raspberry Geschmack</p>
+                <p class="price">€7.99</p>
+                <button onclick="openPopup('ELFBAR Bluebarry Raspberry', 'https://cdn02.plentymarkets.com/fp799r13gmb5/item/images/10575/full/elf-bar-600-blueberry-raspberry-20mg.jpg', 7.99, '600 Puffs, Bluebarry Raspberry Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://smokesmart-online.de/media/af/2e/37/1693388596/hqd-e-vape-mit-nikotin_8.jpg" alt="HQD mix Bundle">
+                <h3>HQD mix Bundle</h3>
+                <p>HQD mix Bundle mit allen Geschmacksrichtungen (Dragon Strawberry, Black ICE und Shoria)</p>
+                <p class="price">€19.99</p>
+                <button onclick="openPopup('HQD mix Bundle', 'https://smokesmart-online.de/media/af/2e/37/1693388596/hqd-e-vape-mit-nikotin_8.jpg', 19.99, 'HQD mix Bundle', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://hookain.de/media/weedesign_images2webp/1600/vape-crystal-bar-pink-lemonade.webp" alt="Crystal Pink Lemonade">
+                <h3>Crystal Pink Lemonade</h3>
+                <p>600 Puffs, Pink Lemonade Geschmack</p>
+                <p class="price">€8.99</p>
+                <button onclick="openPopup('Crystal Pink Lemonade', 'https://hookain.de/media/weedesign_images2webp/1600/vape-crystal-bar-pink-lemonade.webp', 8.99, '600 Puffs, Pink Lemonade Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg-b12yUM_5jAD3ZeJvEazYx0125I_Rpvb3Q&s" alt="Crystal Sour Apple">
+                <h3>Crystal Sour Apple</h3>
+                <p>600 Puffs, Sour Apple Geschmack</p>
+                <p class="price">€8.99</p>
+                <button onclick="openPopup('Crystal Sour Apple', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg-b12yUM_5jAD3ZeJvEazYx0125I_Rpvb3Q&s', 8.99, '600 Puffs, Sour Apple Geschmack', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://justvape.nu/wp-content/uploads/2022/09/elfbar-bundle.jpg" alt="ELFBAR mix Bundle">
+                <h3>ELFBAR mix Bundle</h3>
+                <p>ELFBAR mix Bundle mit allen Geschmacksrichtungen (Blueberry, Raspberry und Strawberry Raspberry Cherry Ice)</p>
+                <p class="price">€19.99</p>
+                <button onclick="openPopup('ELFBAR mix Bundle', 'https://justvape.nu/wp-content/uploads/2022/09/elfbar-bundle.jpg', 19.99, 'ELFBAR mix Bundle', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://shop.vape.hk/wp-content/uploads/2024/03/corssi-crystal6000-disposable-vape-kits_main.jpg" alt="Crystal mix Bundle">
+                <h3>Crystal mix Bundle</h3>
+                <p>Crystal mix Bundle mit allen Geschmacksrichtungen (Watermelon ICE, Pink Lemonade und Sour Apple)</p>
+                <p class="price">€21.99</p>
+                <button onclick="openPopup('Crystal mix Bundle', 'https://shop.vape.hk/wp-content/uploads/2024/03/corssi-crystal6000-disposable-vape-kits_main.jpg', 21.99, 'Crystal mix Bundle', 'Nikotin, Propylenglycol, Glycerin, Aromen')">Details</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Vape Onlineshop</p>
+            <p><a href="#contact">Kontaktieren Sie uns</a> | <a href="#about">Über uns</a></p>
+            <p>Folgen Sie uns auf <a href="https://instagram.com">Instagram</a> und <a href="https://facebook.com">Facebook</a>.</p>
+        </footer>
+    </div>
+
+    <script>
+        let cart = [];
+    
+        function openPopup(product, imageUrl, price, description, ingredients) {
+            currentProduct = { product, price, imageUrl };
+            document.getElementById('popup-title').innerText = product;
+            document.getElementById('popup-image').src = imageUrl;
+            document.getElementById('popup-price').innerText = price.toFixed(2);
+            document.getElementById('popup-quantity').value = 1;
+            document.getElementById('popup-description').innerText = description;
+            document.getElementById('popup-ingredients').innerText = ingredients;
+    
+            document.getElementById('product-popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+    
+        function closePopup() {
+            document.getElementById('product-popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    
+        document.getElementById('add-to-cart-btn').addEventListener('click', function () {
+            const quantity = parseInt(document.getElementById('popup-quantity').value);
+            if (quantity > 0) {
+                const cartItem = {
+                    product: currentProduct.product,
+                    price: currentProduct.price,
+                    quantity: quantity,
+                    imageUrl: currentProduct.imageUrl
+                };
+                cart.push(cartItem);
+                alert(currentProduct.product + ' wurde zum Warenkorb hinzugefügt.');
+                closePopup();
+                updateCartDisplay();
+            }
+        });
+    
+        function toggleCartModal() {
+            document.getElementById('cart-modal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            displayCartItems();
+        }
+    
+        function closeCartModal() {
+            document.getElementById('cart-modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items-modal');
+            cartItemsContainer.innerHTML = '';
+    
+            let total = 0;
+    
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Ihr Warenkorb ist leer.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.innerHTML = `<img src="${item.imageUrl}" width="50" /> 
+                                                 <p>${item.product} - ${item.quantity} x €${item.price.toFixed(2)}</p>`;
+                    cartItemsContainer.appendChild(cartItemElement);
+                    total += item.price * item.quantity;
+                });
+            }
+    
+            document.getElementById('cart-total-modal').innerText = `Gesamt: €${total.toFixed(2)}`;
+        }
+    
+        function clearCart() {
+            cart = [];
+            updateCartDisplay();
+            displayCartItems();
+        }
+    
+        function updateCartDisplay() {
+            const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = `(${cartCount})`;
+        }
+    
+    </script>
+    <script>
+        let loggedInUser = null;
+    
+        function register() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            if (username && password) {
+                const users = JSON.parse(localStorage.getItem('users')) || {};
+                
+                if (users[username]) {
+                    alert('Benutzername existiert bereits.');
+                } else {
+                    users[username] = password;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Registrierung erfolgreich. Sie können sich jetzt anmelden.');
+                }
+            } else {
+                alert('Bitte geben Sie einen Benutzernamen und ein Passwort ein.');
+            }
+        }
+    
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+    
+            if (users[username] && users[username] === password) {
+                loggedInUser = username;
+                alert('Anmeldung erfolgreich.');
+                updateUserDisplay();
+                closeAuthModal();
+            } else {
+                alert('Ungültiger Benutzername oder Passwort.');
+            }
+        }
+    
+        function updateUserDisplay() {
+            if (loggedInUser) {
+                document.getElementById('userDisplay').style.display = 'block';
+                document.getElementById('loggedInUser').innerText = loggedInUser;
+            } else {
+                document.getElementById('userDisplay').style.display = 'none';
+            }
+        }
+    
+        function toggleAuthModal() {
+            document.getElementById('authModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+    
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    
+        document.getElementById('overlay').addEventListener('click', function() {
+            closeAuthModal();
+            closeCartModal();
+        });
+    
+        window.onload = function() {
+            updateUserDisplay();
+        };
+    </script>
+</body>
+</html>
