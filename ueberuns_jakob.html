@@ -1,31 +1,84 @@
-<html>
-<style>
-.Arial {
-    color:rgb(0, 0, 0);
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:700;
-}
-
-.big {
-    font-size: 50px;
-
-}
-
-
-</style>
-
-
-    <head><h1 class="Arial big">Wir würden uns freuen, von dir zu hören.</h1></head>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .banner img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+        .contact-info {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .back-button a {
+            padding: 10px 15px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        .back-button a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
 <body>
-    <img src="https://www.vapebazar.de/wp-content/uploads/2022/07/vapebazar-firma-1536x614.jpg" alt="Firmenbild">
-   <br> <img src="data:image/png;base64,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" alt="standort"> <br>
-    
 
+<div class="back-button">
+    <a href="https://alligad.github.io/jjm-vapeshop/homepage__moritz.html">Zurück</a>
+</div>
+
+<div class="container">
+    <h1>Kontaktieren Sie uns</h1>
+
+    <div class="banner">
+        <img src="https://www.vapebazar.de/wp-content/uploads/2022/07/vapebazar-firma-1024x410.jpg" alt="Banner der Firma">
+    </div>
+
+    <div class="contact-info">
+        <p><strong>Adresse:</strong>Bei Jakob zuhause</p>
+        <p><strong>Telefon:</strong> +49 187 18787</p>
+        <p><strong>E-Mail:</strong> jakob.sabasch@klafs.de</p>
+    </div>
+</div>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 
 </body>
-
-
-
-
-
 </html>
