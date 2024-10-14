@@ -13,3 +13,4 @@ https://github.com/user-attachments/files/17306826/_______.txt
 ------------------------------------------------------------------------
 Um die Website zu öffnen die Startseite_jonas.html datei öffnen
 ------------------------------------------------------------------------
+Oder einfach diesen Link öffnen:
