@@ -11,5 +11,5 @@ Kontakt erstellt von: Jonas / Jakob / Moritz -> Datei: kontak_alle.html
 https://github.com/user-attachments/assets/d84496f6-0fdd-4798-a71c-02becba655fe
 https://github.com/user-attachments/files/17306826/_______.txt
 ------------------------------------------------------------------------
-Um die Website zu öffnen die Startseite.html datei öffnen
+Um die Website zu öffnen die Startseite_jonas.html datei öffnen
 ------------------------------------------------------------------------
